@@ -38,6 +38,7 @@ func TestUserToResponse(t *testing.T) {
 	resp, err := newUser2.ToResponse()
 	c.NoError(err)
 
-	json.Unmarshal(resp, &newUser1)
+	err = json.Unmarshal(resp, &newUser1)
+	c.NoError(err)
 	c.Equal(newUser1, newUser2)
 }
