@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ main ]
 
+defaults:
+  run:
+    working-directory: backend
+
 jobs:
 
   build:
@@ -30,4 +34,4 @@ jobs:
         fi
 
     - name: Test
-      run: go test -v .
+      run: go test -v ./...
