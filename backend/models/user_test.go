@@ -11,7 +11,6 @@ func TestUserVerifyParams(t *testing.T) {
 	c := require.New(t)
 
 	newUser := UserModel{
-		UserID:   12,
 		Username: "FatChicken",
 		Score:    32,
 	}
@@ -30,7 +29,6 @@ func TestUserToResponse(t *testing.T) {
 
 	var newUser1 UserModel
 	newUser2 := UserModel{
-		UserID:   12,
 		Username: "FatChicken",
 		Score:    32,
 	}

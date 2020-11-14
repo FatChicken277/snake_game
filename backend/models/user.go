@@ -12,9 +12,8 @@ var (
 
 // UserModel defines the model for users
 type UserModel struct {
-	UserID   int    `json:"user_id"`
 	Username string `json:"username"`
-	Score    int    `json:"score"`
+	Score    uint   `json:"score"`
 }
 
 // UserList defines the structure of a user list
