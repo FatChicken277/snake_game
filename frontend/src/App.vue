@@ -55,4 +55,8 @@ export default {
   ::-webkit-scrollbar-thumb:hover {
     background: #6dad00; 
   }
+
+  #app {
+    background-color: var(--v-background-base);
+  }
 </style>
