@@ -2,13 +2,13 @@
   <v-footer
       color="secondary"
       dark
-      absolute
+      bottom
       height="70"
       class="px-9"
   >
     <v-col cols="10">
       <div class="about">
-        Created by FatChicken277 - 2020
+          Created by FatChicken277 - 2020
       </div>
     </v-col>
     <v-col cols="2">

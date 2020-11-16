@@ -3,7 +3,7 @@
     <v-img 
       class="home-img"
       src=""
-      lazy-src="https://opengameart.org/sites/default/files/JWDLx5AZBtI.jpg"
+      lazy-src="../../assets/background.jpg"
     >
       <template v-slot:placeholder>
         <v-row
@@ -26,7 +26,7 @@
 <style>
   .home-img {
     width: 100%;
-    height: 80vh;
+    height: 32.9rem;
   }
   .placeholder {
     flex-direction: column;

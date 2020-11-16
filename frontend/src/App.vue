@@ -30,6 +30,7 @@ export default {
   .v-main {
     font-family: 'VT323', monospace;
   }
+
     /* width */
   ::-webkit-scrollbar {
     width: 5px;
