@@ -1,5 +1,5 @@
 <template>
-  <div class="login">
+  <div class="register">
     <v-container fluid class="pa-0">
 			<v-img 
         class="home-img"
@@ -21,9 +21,9 @@
 							align="center"
 						>
 							<v-col cols="9">
-								<div class="login py-7">
-									<h1>Sign in</h1>
-									<div class="login-inputs mt-4">
+								<div class="register py-7">
+									<h1>Sign up</h1>
+									<div class="register-inputs mt-4">
 										<v-form
 											ref="form"
 											v-model="valid"
@@ -39,6 +39,12 @@
 												:rules="passwordRules"
 												label="Password"
 											></v-text-field>
+                      <v-text-field
+												v-model="passwordConfirm"
+												type="password"
+												:rules="[passwordConfirmRequired, passwordMatch]"
+												label="Password confirm"
+											></v-text-field>
 										</v-form>
 									</div>
 									<v-btn
@@ -47,9 +53,9 @@
 										outlined
 										class="mt-7"
 										:disabled="!valid"
-										@click="login"
+										@click="register"
 									>
-										Login
+										Register
 									</v-btn>
 								</div>
 							</v-col>
@@ -64,7 +70,7 @@
 <script>
 
 export default {
-  name: 'Login',
+  name: 'Register',
 	data: () => ({
 		valid: false,
 		username: '',
@@ -77,17 +83,24 @@ export default {
 			v => !!v || 'Password is required',
 			v => v.length > 6 || 'Password must be great than 6 characters',
 		],
+    passwordConfirm: '',
+    passwordConfirmRequired: v => !!v || 'Password confirmation is required',
 	}),
+  computed: {
+    passwordMatch() {
+      return this.password === this.passwordConfirm || 'Passwords must match'
+    }
+  },
 	methods: {
-		login() {
-			console.log(this.username, this.password)
+		register() {
+			console.log(this.username, this.password, this.passwordConfirm)
 		}
 	}
 }
 </script>
 
 <style>
-	.login h1 {
+	.register h1 {
 		font-size: 3rem;
 	}
 </style>

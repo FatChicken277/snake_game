@@ -2,7 +2,11 @@
   <v-app>
     <v-main>
       <router-view name="header" />
-      <fade-transition>
+      <fade-transition
+        origin="center"
+        mode="out-in"
+        :duration="250"
+      >
         <router-view/>
       </fade-transition>
       <router-view name="footer" />
