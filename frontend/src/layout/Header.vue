@@ -18,18 +18,23 @@
 
     <v-spacer></v-spacer>
 
-    <v-btn
-      color="primary"
-      outlined
-      class="mr-4"
-    >
-      <router-link to="/register">Register</router-link>
-    </v-btn>
-    <v-btn
-      color="primary"
-    >
-      <router-link to="/login" style="color: #1E1E1E;">Login</router-link>
-    </v-btn>
+    <router-link to="/register">
+      <v-btn
+        color="primary"
+        outlined
+        class="mr-4"
+      >
+        Register
+      </v-btn>
+    </router-link>
+    <router-link to="/login">
+      <v-btn
+        color="primary"
+        style="color: #1E1E1E;"
+      >
+        Login
+      </v-btn>
+    </router-link>
   </v-app-bar>
 </template>
 
