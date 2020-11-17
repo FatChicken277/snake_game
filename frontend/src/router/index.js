@@ -5,6 +5,7 @@ import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import Game from '../views/Game.vue'
 import Header from '../layout/Header.vue'
+import NotFound from '../views/NotFound.vue'
 import Footer from '../layout/Footer.vue'
 
 Vue.use(VueRouter)
@@ -56,6 +57,14 @@ const routes = [
     },
     meta: {
       requiresAuth: true,
+    }
+  },
+  {
+    path: "*",
+    name: "404",
+    components: {
+      header: Header,
+      default: NotFound,
     }
   }
 ]

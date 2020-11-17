@@ -64,7 +64,6 @@
 				</template>
 			</v-img>
     </v-container>
-
   </div>
 </template>
 
