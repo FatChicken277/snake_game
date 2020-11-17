@@ -17,6 +17,9 @@ const routes = [
       header: Header,
       default: Home,
       footer: Footer,
+    },
+    meta: {
+      requiresVisitor: true,
     }
   },
   {
@@ -26,6 +29,9 @@ const routes = [
       header: Header,
       default: Login,
       footer: Footer,
+    },
+    meta: {
+      requiresVisitor: true,
     }
   },
   {
@@ -35,6 +41,9 @@ const routes = [
       header: Header,
       default: Register,
       footer: Footer,
+    },
+    meta: {
+      requiresVisitor: true,
     }
   },
   {
@@ -44,6 +53,9 @@ const routes = [
       header: Header,
       default: Game,
       footer: Footer,
+    },
+    meta: {
+      requiresAuth: true,
     }
   }
 ]

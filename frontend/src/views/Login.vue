@@ -20,6 +20,12 @@
 							width="350"
 							align="center"
 						>
+              <v-alert v-if="alert.status"
+                dense
+                :color="alert.type === 'error' ? '#cc4949' : '#5beb34'"
+              >
+                {{ alert.message }}
+              </v-alert>
 							<v-col cols="9">
 								<div class="login py-7">
 									<h1>Sign in</h1>
@@ -58,6 +64,7 @@
 				</template>
 			</v-img>
     </v-container>
+
   </div>
 </template>
 
@@ -77,10 +84,33 @@ export default {
 			v => !!v || 'Password is required',
 			v => v.length > 6 || 'Password must be great than 6 characters',
 		],
+    alert: {
+      status: false,
+      type: '#cc4949',
+      message: '',
+    }
 	}),
 	methods: {
-		login() {
-			console.log(this.username, this.password)
+		async login() {
+			await this.$store.dispatch("signIn", {
+        username: this.username,
+        password: this.password,
+      })
+        .then(() => {
+          this.$router.push("/game")
+        })
+        .catch(error => {
+          this.alert = {
+            status: true,
+            type: 'error',
+            message: error.response.data.message.toUpperCase(),
+          }
+          setTimeout(() => {
+            this.alert.status = false
+          }, 2500);
+        })
+
+      this.password = ''
 		}
 	}
 }

@@ -18,7 +18,7 @@
 
     <v-spacer></v-spacer>
 
-    <router-link to="/register">
+    <router-link to="/register" v-if="!loggedIn">
       <v-btn
         color="primary"
         outlined
@@ -27,7 +27,7 @@
         Register
       </v-btn>
     </router-link>
-    <router-link to="/login">
+    <router-link to="/login" v-if="!loggedIn">
       <v-btn
         color="primary"
         style="color: #1E1E1E;"
@@ -35,12 +35,31 @@
         Login
       </v-btn>
     </router-link>
+    <v-btn
+      v-if="loggedIn"
+      color="primary"
+      outlined
+      @click="signOut"
+    >
+      Logout
+    </v-btn>
   </v-app-bar>
 </template>
 
 <script>
   export default {
-    name: "Header"
+    name: "Header",
+    computed: {
+      loggedIn() {
+        return this.$store.getters.loggedIn
+      }
+    },
+    methods: {
+      async signOut() {
+        await this.$store.dispatch("signOut")
+        this.$router.push("/")
+      }
+    }
   }
 </script>
 
