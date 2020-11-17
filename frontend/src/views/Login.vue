@@ -85,7 +85,7 @@ export default {
 		],
     alert: {
       status: false,
-      type: '#cc4949',
+      type: '',
       message: '',
     }
 	}),

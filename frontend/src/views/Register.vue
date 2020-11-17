@@ -20,6 +20,12 @@
 							width="350"
 							align="center"
 						>
+              <v-alert v-if="alert.status"
+                dense
+                :color="alert.type === 'error' ? '#cc4949' : '#5beb34'"
+              >
+                {{ alert.message }}
+              </v-alert>
 							<v-col cols="9">
 								<div class="register py-7">
 									<h1>Sign up</h1>
@@ -85,6 +91,11 @@ export default {
 		],
     passwordConfirm: '',
     passwordConfirmRequired: v => !!v || 'Password confirmation is required',
+    alert: {
+      status: false,
+      type: '',
+      message: '',
+    }
 	}),
   computed: {
     passwordMatch() {
@@ -92,8 +103,28 @@ export default {
     }
   },
 	methods: {
-		register() {
-			console.log(this.username, this.password, this.passwordConfirm)
+		async register() {
+			await this.$store.dispatch("register", {
+        username: this.username,
+        password: this.password,
+        passwordConfirm: this.passwordConfirm,
+      })
+        .then(() => {
+          this.$router.push("/login")
+        })
+        .catch(error => {
+          this.alert = {
+            status: true,
+            type: 'error',
+            message: error.response.data.message.toUpperCase(),
+          }
+          setTimeout(() => {
+            this.alert.status = false
+          }, 2500);
+        })
+
+      this.password = ''
+      this.passwordConfirm = ''
 		}
 	}
 }

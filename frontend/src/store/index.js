@@ -23,6 +23,21 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    register(context, credentials) {
+      return new Promise((resolve, reject) => {
+        axios.post(baseURL + 'register', {
+          username: credentials.username,
+          password: credentials.password,
+          password_confirm: credentials.passwordConfirm,
+        })
+          .then(response => {
+            resolve(response)
+          })
+          .catch(err => {
+            reject(err);
+          });
+      })
+    },
     signIn(context, credentials) {
       return new Promise((resolve, reject) => {
         axios.post(baseURL + 'login', {
