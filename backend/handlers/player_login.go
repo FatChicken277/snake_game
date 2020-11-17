@@ -6,6 +6,8 @@ import (
 	"snake_game/backend/authentication"
 	"snake_game/backend/models"
 
+	"github.com/dgrijalva/jwt-go"
+	"github.com/go-chi/jwtauth"
 	"github.com/jackc/pgx"
 )
 
@@ -27,7 +29,7 @@ func getAndVerifyLoginParams(dbConn *pgx.Conn, r *http.Request, player *models.P
 }
 
 // PlayerLogin is in charge of a player login
-func PlayerLogin(dbConn *pgx.Conn) http.HandlerFunc {
+func PlayerLogin(dbConn *pgx.Conn, tokenAuth *jwtauth.JWTAuth) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var player models.PlayerModel
 
@@ -43,10 +45,14 @@ func PlayerLogin(dbConn *pgx.Conn) http.HandlerFunc {
 			return
 		}
 
-		player.Password, player.PasswordHash = "", ""
+		_, tokenString, err := tokenAuth.Encode(jwt.MapClaims{"player_id": int64(player.PlayerID)})
+		if err != nil {
+			LogError(NewErrorResponse(ErrorResponseInternalServerError, w, err.Error()))
+			return
+		}
 
 		resp := ResponseOK
-		resp.Data = player
+		resp.Token = tokenString
 
 		LogError(NewResponse(resp, w))
 	}

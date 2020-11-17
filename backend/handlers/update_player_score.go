@@ -6,19 +6,18 @@ import (
 	"net/http"
 	"snake_game/backend/models"
 	"snake_game/backend/storage"
-	"strconv"
 
-	"github.com/go-chi/chi"
+	"github.com/go-chi/jwtauth"
 	"github.com/jackc/pgx"
 )
 
 func getAndVerifyUpdateScoreParams(dbConn *pgx.Conn, r *http.Request, player *models.PlayerModel) error {
-	playerID, err := strconv.Atoi(chi.URLParam(r, "player_id"))
+	_, claims, err := jwtauth.FromContext(r.Context())
 	if err != nil {
-		return ErrInvalidPlayer
+		return err
 	}
 
-	player.PlayerID = playerID
+	player.PlayerID = int(claims["player_id"].(float64)) + 1
 
 	query := "SELECT username FROM players WHERE player_id = $1;"
 	row := dbConn.QueryRow(context.Background(), query, player.PlayerID)

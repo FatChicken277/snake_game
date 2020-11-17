@@ -11,7 +11,7 @@ import (
 
 var (
 	// ErrInvalidPlayer indicates that the player does not exist
-	ErrInvalidPlayer = errors.New("the player associated with the username does not exist")
+	ErrInvalidPlayer = errors.New("invalid username")
 	// ErrInvalidPassword indicates that the password is incorrect
 	ErrInvalidPassword = errors.New("wrong password")
 )

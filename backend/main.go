@@ -8,6 +8,8 @@ import (
 	"snake_game/backend/storage"
 
 	"github.com/go-chi/chi"
+	"github.com/go-chi/cors"
+	"github.com/go-chi/jwtauth"
 )
 
 const (
@@ -19,19 +21,33 @@ func main() {
 	port := ":3000"
 	router := chi.NewRouter()
 
+	router.Use(cors.Handler(cors.Options{
+		AllowedOrigins: []string{"*"},
+
+		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-CSRF-Token"},
+		ExposedHeaders:   []string{"Link"},
+		AllowCredentials: false,
+		MaxAge:           300,
+	}))
+
 	dbConn, err := storage.DBConection(DatabaseSource)
 	if err != nil {
 		handlers.LogError(err)
 	}
 	defer dbConn.Close(context.Background())
 
+	tokenAuth := jwtauth.New("HS256", []byte("secret"), nil)
+
 	router.Route("/v1/players", func(r chi.Router) {
 		r.Post("/register", handlers.PlayerRegister(dbConn))
-		r.Post("/login", handlers.PlayerLogin(dbConn))
+		r.Post("/login", handlers.PlayerLogin(dbConn, tokenAuth))
 		r.Get("/leaderboard", handlers.PlayerLeaderboard(dbConn))
 
-		r.Route("/{player_id}", func(r chi.Router) {
-			r.Put("/", handlers.UpdatePlayerScore(dbConn))
+		r.Group(func(r chi.Router) {
+			r.Use(jwtauth.Verifier(tokenAuth))
+			r.Use(jwtauth.Authenticator)
+			r.Put("/score", handlers.UpdatePlayerScore(dbConn))
 		})
 	})
 

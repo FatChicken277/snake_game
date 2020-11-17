@@ -21,7 +21,7 @@ var (
 	ErrMissingMaxScore = errors.New("'max_score' cannot be empty")
 
 	// ErrInvalidPlayer indicates that the player does not exist
-	ErrInvalidPlayer = errors.New("the player associated with the player_id does not exist")
+	ErrInvalidPlayer = errors.New("the player associated with the token does not exist")
 
 	// ErrInvalidJSON indicates that an invalid json was entered
 	ErrInvalidJSON = errors.New("Invalid JSON string")
