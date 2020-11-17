@@ -10,6 +10,7 @@
             elevation="4"
             padding="1"
           >
+            <Game />
           </v-sheet>
         </v-col>
         <v-spacer />
@@ -23,10 +24,12 @@
 
 <script>
 import Leaderboard from '@/components/Game/Leaderboard.vue'
+import Game from '@/components/Game/Game.vue'
 
 export default {
    name: 'Home',
    components: {
+    Game,
     Leaderboard
   },
 }
