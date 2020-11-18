@@ -58,6 +58,18 @@ export default new Vuex.Store({
     signOut(context) {
       localStorage.removeItem('token')
       context.commit("destoyToken")
+    },
+    getLeaderboard() {
+      return new Promise((resolve, reject) => {
+        axios.get(baseURL + 'leaderboard')
+          .then(response => {
+            const leaderboard = response.data.data
+            resolve(leaderboard || [])
+          })
+          .catch(err => {
+            reject(err);
+          });
+      })
     }
   },
   modules: {
