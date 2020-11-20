@@ -1,7 +1,7 @@
 <template>
   <v-row>
     <v-col class="12">
-      <div :id="containerId" v-if="downloaded" />
+      <div :id="containerId" v-if="loaded" />
       <div class="loader" v-else>
         <v-progress-linear
           :size="70"
@@ -19,14 +19,14 @@ export default {
   name: 'Game',
   data() {
     return {
-      downloaded: false,
+      loaded: false,
       gameInstance: null,
       containerId: 'game-container'
     }
   },
   async mounted() {
     const game = await import('@/game/game')
-    this.downloaded = true
+    this.loaded = true
     this.$nextTick(() => {
       this.gameInstance = game.launch(this.containerId)
     })
