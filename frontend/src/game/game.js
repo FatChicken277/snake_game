@@ -8,13 +8,14 @@ function launch(containerId) {
     type: Phaser.AUTO,
     width: 740,
     height: 440,
-    backgroundColor: '#90EE90',
+    backgroundColor: '#96bb58',
     parent: containerId,
     autoCenter: Phaser.Scale.CENTER_BOTH,
     physics: {
       default: 'arcade',
       arcade: {
         gravity: { y: 0 },
+        debug: false
       }
     },
     scene: [BootScene, PlayScene]
