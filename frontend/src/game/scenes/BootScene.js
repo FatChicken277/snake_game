@@ -26,8 +26,13 @@ export default class BootScene extends Scene {
     this.cameras.main.fadeIn(1000)
 
     if (this.backgroundMusic == undefined) {
-      this.backgroundMusic = this.sound.add(BACKGROUND_MUSIC, {volume: 0.5, loop: true})
+      this.backgroundMusic = this.sound.add(BACKGROUND_MUSIC, {volume: 0, loop: true})
       this.backgroundMusic.play()
+      this.tweens.add({
+        targets:  this.backgroundMusic,
+        volume:   0.5,
+        duration: 10000
+      })
     }
 
     this.background = this.add.image(0, 0, BOOT_BACKGROUND).setOrigin(0)

@@ -1,4 +1,5 @@
 import { Scene, Actions, Math as PhaserMath } from 'phaser'
+import axios from 'axios'
 import background from '@/game/assets/background.svg'
 import snakeHead from '@/game/assets/head.svg'
 import snakeBody from '@/game/assets/body.svg'
@@ -162,9 +163,32 @@ export default class PlayScene extends Scene {
 
     this.cameras.main.fadeOut(500)
 
+    if (this.score > 0) {
+      this.updateScore()
+    }
+
     setTimeout(() => {
       this.scene.start('MenuScene', { score: this.score, music: this.backgroundMusic })
     }, 500)
+  }
+
+  updateScore() {
+    let config = {
+      method: 'put',
+      url: 'http://localhost:3000/v1/players/score',
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('token'),
+        'Content-Type': 'application/json'
+      },
+      data : {
+        max_score: this.score
+      }
+    }
+
+    axios(config)
+    .catch(err => {
+      console.log(err)
+    })
   }
 
   update () {
