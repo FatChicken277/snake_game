@@ -41,19 +41,19 @@ export default {
   }
 
   ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px #1E1E1E; 
+    box-shadow: inset 0 0 5px #1E1E1E;
     border-radius: 2px;
   }
 
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: #6ddb18; 
+    background: #6ddb18;
     border-radius: 10px;
   }
 
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background: #6dad00; 
+    background: #6dad00;
   }
 
   #app {

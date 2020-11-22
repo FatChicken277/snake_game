@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <v-container fluid class="pa-0">
-			<v-img 
+			<v-img
         class="home-img"
         src=""
         lazy-src="../assets/background.jpg"
