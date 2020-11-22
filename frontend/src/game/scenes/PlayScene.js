@@ -32,7 +32,8 @@ export default class PlayScene extends Scene {
     super({ key: 'PlayScene' })
   }
 
-  init () {
+  init (data) {
+    this.backgroundMusic = data.music
     this.score = 0
     this.eaten = 0
     this.alive = true
@@ -53,8 +54,14 @@ export default class PlayScene extends Scene {
   }
 
   create () {
-    this.background = this.add.tileSprite(0, 0, 1920, 1920, BACKGROUND)
-    this.background.setOrigin(0)
+    this.cameras.main.fadeIn(1000)
+    this.tweens.add({
+      targets:  this.backgroundMusic,
+      volume:   0,
+      duration: 20000
+    })
+
+    this.background = this.add.tileSprite(0, 0, 1920, 1920, BACKGROUND).setOrigin(0)
     this.physics.world.setBounds(0, 0, this.background.width, this.background.height, true, true, true, true)
 
     this.body = this.add.group({key: SNAKE_BODY, frameQuantity: 2})
@@ -97,11 +104,12 @@ export default class PlayScene extends Scene {
   }
 
   eat(head, food) {
+    this.eaten += 1
+
     if (food.texture.key === GREEN_APPLE) {
       this.body.create(-10000, 0, SNAKE_BODY)
       this.sound.play(EAT_GREEN_SOUND)
       this.score += 1
-      this.eaten += 1
     } else {
       for (let i = 0; i < this.bodyparts.length/2; i++) {
         this.tail = this.body.getLast(true)
@@ -143,7 +151,7 @@ export default class PlayScene extends Scene {
 
   die(head, obstacle) {
     this.alive = false
-    this.sound.play(DEAD_SOUND)
+    this.sound.play(DEAD_SOUND, {volume: 0.3})
 
     if (obstacle !== undefined) {
       obstacle.setBounce(0)
@@ -152,11 +160,11 @@ export default class PlayScene extends Scene {
 
     this.head.setVelocity(0, 0)
 
-    this.cameras.main.fade(500, 0, 0, 0)
+    this.cameras.main.fadeOut(500)
 
     setTimeout(() => {
-      this.scene.start('BootScene')
-    }, 600)
+      this.scene.start('MenuScene', { score: this.score, music: this.backgroundMusic })
+    }, 500)
   }
 
   update () {
