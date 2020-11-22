@@ -36,7 +36,7 @@ func AddPlayer(conn *pgx.Conn, p *models.PlayerModel) error {
 
 // UpdatePlayerScore is used to update the player max score
 func UpdatePlayerScore(conn *pgx.Conn, p *models.PlayerModel) error {
-	query := "UPDATE players SET max_score = $1 WHERE player_id = $2;"
+	query := "UPDATE players SET max_score = $1 WHERE player_id = $2 AND $1 > max_score;"
 
 	_, err := conn.Exec(context.Background(), query, p.MaxScore, p.PlayerID)
 	if err != nil {
