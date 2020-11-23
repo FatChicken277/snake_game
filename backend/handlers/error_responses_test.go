@@ -42,7 +42,7 @@ func TestNewBadRequestResponse(t *testing.T) {
 	c.Equal(expected, string(body))
 }
 
-func TestNewUnauthorizeddResponse(t *testing.T) {
+func TestNewUnauthorizedResponse(t *testing.T) {
 	c := require.New(t)
 	w := httptest.NewRecorder()
 
