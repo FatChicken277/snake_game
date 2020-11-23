@@ -1,6 +1,6 @@
 # SNAKEE :snake:
 
-SNAKE is a snake game based on the javascript phaser3 graphics engine and on vue js for the frontend and a Golang API as backend.
+SNAKE is a snake game based on the phaser3 graphics engine and on vuejs for the frontend and a Golang API as the backend.
 
 ## Requirements :pencil:
 
