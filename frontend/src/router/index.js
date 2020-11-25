@@ -1,14 +1,14 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-import Login from '../views/Login.vue'
-import Register from '../views/Register.vue'
-import Game from '../views/Game.vue'
-import Header from '../layout/Header.vue'
-import NotFound from '../views/NotFound.vue'
-import Footer from '../layout/Footer.vue'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import Home from '../views/Home.vue';
+import Login from '../views/Login.vue';
+import Register from '../views/Register.vue';
+import Game from '../views/Game.vue';
+import Header from '../layout/Header.vue';
+import NotFound from '../views/NotFound.vue';
+import Footer from '../layout/Footer.vue';
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
@@ -21,11 +21,11 @@ const routes = [
     },
     meta: {
       requiresVisitor: true,
-    }
+    },
   },
   {
-    path: "/login",
-    name: "Login",
+    path: '/login',
+    name: 'Login',
     components: {
       header: Header,
       default: Login,
@@ -33,11 +33,11 @@ const routes = [
     },
     meta: {
       requiresVisitor: true,
-    }
+    },
   },
   {
-    path: "/register",
-    name: "Register",
+    path: '/register',
+    name: 'Register',
     components: {
       header: Header,
       default: Register,
@@ -45,11 +45,11 @@ const routes = [
     },
     meta: {
       requiresVisitor: true,
-    }
+    },
   },
   {
-    path: "/game",
-    name: "Game",
+    path: '/game',
+    name: 'Game',
     components: {
       header: Header,
       default: Game,
@@ -57,20 +57,20 @@ const routes = [
     },
     meta: {
       requiresAuth: true,
-    }
+    },
   },
   {
-    path: "*",
-    name: "404",
+    path: '*',
+    name: '404',
     components: {
       header: Header,
       default: NotFound,
-    }
-  }
-]
+    },
+  },
+];
 
 const router = new VueRouter({
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;

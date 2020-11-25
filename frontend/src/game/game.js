@@ -1,8 +1,7 @@
-import Phaser from 'phaser'
-import BootScene from './scenes/BootScene'
-import PlayScene from './scenes/PlayScene'
-import MenuScene from './scenes/MenuScene'
-
+import Phaser from 'phaser';
+import BootScene from './scenes/BootScene';
+import PlayScene from './scenes/PlayScene';
+import MenuScene from './scenes/MenuScene';
 
 function launch(containerId) {
   return new Phaser.Game({
@@ -16,12 +15,12 @@ function launch(containerId) {
       default: 'arcade',
       arcade: {
         gravity: { y: 0 },
-        debug: false
-      }
+        debug: false,
+      },
     },
-    scene: [BootScene, PlayScene, MenuScene]
-  })
+    scene: [BootScene, PlayScene, MenuScene],
+  });
 }
 
-export default launch
-export { launch }
+export default launch;
+export { launch };

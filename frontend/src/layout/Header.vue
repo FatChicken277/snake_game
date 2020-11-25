@@ -47,20 +47,20 @@
 </template>
 
 <script>
-  export default {
-    name: "Header",
-    computed: {
-      loggedIn() {
-        return this.$store.getters.loggedIn
-      }
+export default {
+  name: 'Header',
+  computed: {
+    loggedIn() {
+      return this.$store.getters.loggedIn;
     },
-    methods: {
-      async signOut() {
-        await this.$store.dispatch("signOut")
-        this.$router.push("/")
-      }
-    }
-  }
+  },
+  methods: {
+    async signOut() {
+      await this.$store.dispatch('signOut');
+      this.$router.push('/');
+    },
+  },
+};
 </script>
 
 <style>

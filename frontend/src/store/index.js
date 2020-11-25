@@ -1,77 +1,77 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from 'vue';
+import Vuex from 'vuex';
 import axios from 'axios';
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
-const baseURL = "http://localhost:3000/v1/players/"
+const baseURL = 'http://localhost:3000/v1/players/';
 export default new Vuex.Store({
   state: {
     token: localStorage.getItem('token') || null,
   },
   getters: {
     loggedIn(state) {
-      return state.token !== null
-    }
+      return state.token !== null;
+    },
   },
   mutations: {
     setToken(state, token) {
-      state.token = token
+      state.token = token;
     },
     destoyToken(state) {
-      state.token = null
-    }
+      state.token = null;
+    },
   },
   actions: {
     register(context, credentials) {
       return new Promise((resolve, reject) => {
-        axios.post(baseURL + 'register', {
+        axios.post(`${baseURL}register`, {
           username: credentials.username,
           password: credentials.password,
           password_confirm: credentials.passwordConfirm,
         })
-          .then(response => {
-            resolve(response)
+          .then((response) => {
+            resolve(response);
           })
-          .catch(err => {
+          .catch((err) => {
             reject(err);
           });
-      })
+      });
     },
     signIn(context, credentials) {
       return new Promise((resolve, reject) => {
-        axios.post(baseURL + 'login', {
+        axios.post(`${baseURL}login`, {
           username: credentials.username,
           password: credentials.password,
         })
-          .then(response => {
-            const token = response.data.token
+          .then((response) => {
+            const { token } = response.data;
 
-            localStorage.setItem('token', token)
-            resolve(context.commit("setToken", token))
+            localStorage.setItem('token', token);
+            resolve(context.commit('setToken', token));
           })
-          .catch(err => {
+          .catch((err) => {
             reject(err);
           });
-      })
+      });
     },
     signOut(context) {
-      localStorage.removeItem('token')
-      context.commit("destoyToken")
+      localStorage.removeItem('token');
+      context.commit('destoyToken');
     },
     getLeaderboard() {
       return new Promise((resolve, reject) => {
-        axios.get(baseURL + 'leaderboard')
-          .then(response => {
-            const leaderboard = response.data.data
-            resolve(leaderboard || [])
+        axios.get(`${baseURL}leaderboard`)
+          .then((response) => {
+            const leaderboard = response.data.data;
+            resolve(leaderboard || []);
           })
-          .catch(err => {
+          .catch((err) => {
             reject(err);
           });
-      })
-    }
+      });
+    },
   },
   modules: {
-  }
-})
+  },
+});

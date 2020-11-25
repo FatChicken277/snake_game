@@ -29,25 +29,25 @@
 </template>
 
 <script>
-  export default {
-    data: () => ({
-      leaderboard: []
-    }),
-    methods: {
-      getLeaderboard() {
-        this.$store.dispatch("getLeaderboard")
-          .then(response => {
-            this.leaderboard = response
-          })
-          .catch(error => {
-            console.log(error)
-          })
-      }
+export default {
+  data: () => ({
+    leaderboard: [],
+  }),
+  methods: {
+    getLeaderboard() {
+      this.$store.dispatch('getLeaderboard')
+        .then((response) => {
+          this.leaderboard = response;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
-    created(){
-      this.getLeaderboard()
-    },
-  }
+  },
+  created() {
+    this.getLeaderboard();
+  },
+};
 </script>
 
 <style>

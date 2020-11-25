@@ -15,26 +15,27 @@
 </template>
 
 <script>
+import { launch } from '@/game/game';
+
 export default {
   name: 'Game',
   data() {
     return {
       loaded: false,
       gameInstance: null,
-      containerId: 'game-container'
-    }
+      containerId: 'game-container',
+    };
   },
   async mounted() {
-    const game = await import('@/game/game')
-    this.loaded = true
+    this.loaded = true;
     this.$nextTick(() => {
-      this.gameInstance = game.launch(this.containerId)
-    })
+      this.gameInstance = launch(this.containerId);
+    });
   },
   destroyed() {
-    this.gameInstance.destroy(false)
-  }
-}
+    this.gameInstance.destroy(false);
+  },
+};
 </script>
 
 <style>

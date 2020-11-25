@@ -23,16 +23,16 @@
 </template>
 
 <script>
-import Leaderboard from '@/components/Game/Leaderboard.vue'
-import Game from '@/components/Game/Game.vue'
+import Leaderboard from '@/components/Game/Leaderboard.vue';
+import Game from '@/components/Game/Game.vue';
 
 export default {
-   name: 'Home',
-   components: {
+  name: 'Home',
+  components: {
     Game,
-    Leaderboard
+    Leaderboard,
   },
-}
+};
 </script>
 
 <style>
